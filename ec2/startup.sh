@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 cd /home/ndeploy/Using-Jupyter-for-Cloud-based-Analysis/docker
+source /home/ndeploy/Using-Jupyter-for-Cloud-based-Analysis/docker/.env
+
 docker-compose up -d cassandra1
 
 sleep 15
