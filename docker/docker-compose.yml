@@ -1,0 +1,56 @@
+version: '3'
+
+networks:
+  nexus:
+
+services:
+
+    solr1:
+        image: sdap/solr-singlenode:${VERSION}
+        container_name: solr1
+        volumes:
+            - ${HOST_DATA_DIR}/solr1:/solr-home
+        environment:
+            - SOLR_HEAP=8g
+        networks:
+            - nexus
+        logging:
+          options:
+            max-size: "10m"
+            max-file: "3"
+
+    cassandra1:
+        image: sdap/cassandra:${VERSION}
+        container_name: cassandra1
+        volumes:
+            - ${HOST_DATA_DIR}/cassandra1:/var/lib/cassandra
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=cassandra1
+        networks:
+            - nexus
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+
+    nexus-webapp:
+        image: sdap/nexus-webapp:${VERSION}
+        depends_on:
+            - solr1
+        container_name: nexus-webapp
+        networks:
+            - nexus
+        ports:
+            - "8083:8083"
+            - "4040:4040"
+        environment:
+            - MASTER=local[4]
+            - CASSANDRA_CONTACT_POINTS=cassandra1
+            - SOLR_URL_PORT=solr1:8983
+            - SPARK_LOCAL_IP=nexus-webapp
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
