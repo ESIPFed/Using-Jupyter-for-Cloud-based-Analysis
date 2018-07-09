@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+mkdir -p ~/.aws
 touch ~/.aws/credentials
 cat << EOF >> ~/.aws/credentials
 [default]
