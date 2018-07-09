@@ -2,6 +2,8 @@
 
 cd /home/ndeploy/Using-Jupyter-for-Cloud-based-Analysis/docker
 source /home/ndeploy/Using-Jupyter-for-Cloud-based-Analysis/docker/.env
+mkdir -p ${HOST_DATA_DIR}/solr1
+chown -R 8983:8983 ${HOST_DATA_DIR}/solr1
 
 docker-compose up -d cassandra1
 
