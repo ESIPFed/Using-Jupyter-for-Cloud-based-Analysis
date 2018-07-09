@@ -1,0 +1,20 @@
+# Tile writer configuration
+ningester:
+  tile_writer:
+    data_store: cassandraStore
+    metadata_store: solrStore
+---
+# Connection settings for the docker profile
+spring:
+    profiles:
+      - docker
+    data:
+      cassandra:
+        keyspaceName: nexustiles
+        contactPoints: cassandra1
+      solr:
+        host: http://solr1:8983/solr/
+
+datasource:
+  solrStore:
+    collection: nexustiles

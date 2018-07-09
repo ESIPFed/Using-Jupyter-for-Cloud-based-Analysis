@@ -44,6 +44,7 @@ services:
         image: sdap/nexus-webapp:${VERSION}
         depends_on:
             - solr1
+            - cassandra1
         container_name: nexus-webapp
         networks:
             - nexus
