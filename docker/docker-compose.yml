@@ -8,6 +8,7 @@ services:
     solr1:
         image: sdap/solr-singlenode:SDAP-109
         container_name: solr1
+        hostname: solr1
         volumes:
             - ${HOST_DATA_DIR}/solr1:/opt/solr/server/solr/nexustiles
         environment:
@@ -24,6 +25,7 @@ services:
     cassandra1:
         image: sdap/cassandra:${VERSION}
         container_name: cassandra1
+        hostname: cassandra1
         volumes:
             - ${HOST_DATA_DIR}/cassandra1:/var/lib/cassandra
         environment:
