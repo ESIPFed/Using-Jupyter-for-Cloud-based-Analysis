@@ -30,9 +30,9 @@ def force_symlink(file1, file2):
 with cd('/home/ndeploy/sdap-search'):
   tar_file = next(f_name for f_name in glob.glob(sys.argv[1]) if os.path.isfile(f_name))
   with tarfile.open(tar_file) as tar:
-    tar.extractall()
+    tar.extractall(path='/home/ndeploy/sdap-search/')
 
-  extracted_dir = os.path.abspath(tar_file.strip('.tar.gz'))
+  extracted_dir = os.path.join('/home/ndeploy/sdap-search/', os.path.basename(tar_file).strip('.tar.gz'))
   os.chmod(os.path.join(extracted_dir, 'bin', 'mudrod-engine'), S_IRWXU | S_IRWXG)
 
   force_symlink(extracted_dir, 'mudrod-engine')
