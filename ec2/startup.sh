@@ -7,8 +7,8 @@ docker-compose up -d cassandra1
 
 sleep 15
 
-docker exec -it cassandra1 cqlsh -e CREATE KEYSPACE IF NOT EXISTS nexustiles WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
-docker exec -it cassandra1 cqlsh -e CREATE TABLE IF NOT EXISTS nexustiles.sea_surface_temp (tile_id uuid PRIMARY KEY, tile_blob blob);
+docker exec -it cassandra1 cqlsh -e "CREATE KEYSPACE IF NOT EXISTS nexustiles WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };"
+docker exec -it cassandra1 cqlsh -e "CREATE TABLE IF NOT EXISTS nexustiles.sea_surface_temp (tile_id uuid PRIMARY KEY, tile_blob blob);"
 
 
 docker-compose up -d

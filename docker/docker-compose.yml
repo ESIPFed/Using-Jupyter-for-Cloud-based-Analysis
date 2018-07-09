@@ -6,14 +6,16 @@ networks:
 services:
 
     solr1:
-        image: sdap/solr-singlenode:${VERSION}
+        image: sdap/solr-singlenode:SDAP-109
         container_name: solr1
         volumes:
-            - ${HOST_DATA_DIR}/solr1:/solr-home
+            - ${HOST_DATA_DIR}/solr1:/opt/solr/server/solr/nexustiles
         environment:
             - SOLR_HEAP=8g
         networks:
             - nexus
+        ports:
+            - "8983:8983"
         logging:
           options:
             max-size: "10m"
@@ -28,6 +30,8 @@ services:
             - CASSANDRA_BROADCAST_ADDRESS=cassandra1
         networks:
             - nexus
+        ports:
+            - "9042:9042"
         logging:
             driver: "json-file"
             options:
