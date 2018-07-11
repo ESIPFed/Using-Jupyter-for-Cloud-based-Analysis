@@ -1,0 +1,42 @@
+# Tile Slicer Config
+ningester:
+    tile_slicer: sliceFileByTilesDesired
+    sliceFileByTilesDesired:
+      tilesDesired: 500
+      timeDimension: time
+      dimensions:
+        - lat
+        - lon
+
+---
+# Tile processors configuration
+ningester:
+    tile_processors:
+      - pythonChainProcessor
+      - generateTileId
+      - addDatasetName
+    pythonChainProcessor:
+      enabled:
+      processor_list:
+        -
+          name: GridReadingProcessor
+          config:
+            latitude: lat
+            longitude: lon
+            time: time
+            variable_to_read: TRMM_3B42_daily_precipitation_V7
+        -
+          name: EmptyTileFilter
+        -
+          name: TileSummarizingProcessor
+    generateTileId:
+      enabled:
+    addDatasetName:
+      enabled:
+      datasetName: TRMM_3B42_daily_scrubbed
+---
+# Tile writer configuration
+ningester:
+  tile_writer:
+    data_store: cassandraStore
+metadata_store: solrStore
