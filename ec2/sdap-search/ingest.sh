@@ -5,4 +5,5 @@ export MUDROD_CONFIG=/home/ndeploy/Using-Jupyter-for-Cloud-based-Analysis/ec2/sd
 export SPARK_LOCAL_IP="127.0.0.1"
 
 cd /home/ndeploy/sdap-search
-./bin/mudrod-engine -f -dataDir ${DATA_DIR}/2018/01
+./bin/mudrod-engine -m
+./bin/mudrod-engine -f -dataDir ${DATA_DIR}/2017/01
