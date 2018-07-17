@@ -13,7 +13,7 @@ export DATA_DIRECTORY=/home/ndeploy/ingest/data/avhrr-clim
 for g in `ls ${DATA_DIRECTORY} | awk "{print $1}"`
 do
   docker run -d --rm --name $(echo avhrr-clim_$g | cut -d'.' -f 1) --network docker_nexus -v ${NINGESTER_CONFIG}/connections.yml:/config/connections.yml -v ${NINGESTER_CONFIG}/avhrr-clim.yml:/config/avhrr-clim.yml -v ${DATA_DIRECTORY}/${g}:/data/${g} sdap/ningester:${VERSION} docker,solr,cassandra
-  sleep 5
+  sleep 15
 done
 
 export DATA_DIRECTORY=/home/ndeploy/ingest/data/trmm
